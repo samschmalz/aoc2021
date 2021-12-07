@@ -17,7 +17,7 @@ sub sum_three {
 my @sums = ();
 
 for (my $i = 0; $i < $#lines; $i++) {
-	my $temp_sum = sum_three($i);
+	my $temp_sum = $lines[$i] + $lines[$i+1] + $lines[$i+2];
 	push(@sums, $temp_sum);
 	if ($i != 0 and $sums[$i] > $sums[$i-1]) {
 		$inc_count++;
