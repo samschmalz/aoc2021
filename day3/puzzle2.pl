@@ -1,8 +1,6 @@
 use strict;
 use warnings;
 
-use List::Util qw(max);
-
 open(my $input, "<", "input.txt");
 
 my $first_line = <$input>;
@@ -12,6 +10,7 @@ seek($input, 0, 0);
 my @lines = <$input>;
 
 close($input);
+$input = undef;
 
 sub get_common_digit {
 	my ($position, @arr) = @_;
