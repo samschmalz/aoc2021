@@ -12,7 +12,8 @@ our @Export = qw( check_number check_win );
 
 sub check_number {
 	my($number, $bingo_card_ref, $score_card_ref) = @_;
-	my (@bingo_card, @score_card) = (@$bingo_card_ref, @$score_card_ref);
+	my @bingo_card = @{ $bingo_card_ref };
+	my @score_card = @{ $score_card_ref };
 
 	foreach my $i (0 .. 4) {
 		my $break = 0;
@@ -25,13 +26,12 @@ sub check_number {
 		}
 		last if $break;
 	}
-	print Dumper @score_card;
 	return \@score_card;
 }
 
 sub check_win {
 	my $bingo_card_ref = shift;
-	my @bingo_card = @$bingo_card_ref;
+	my @bingo_card = @{ $bingo_card_ref };
 
 	my $win = 0;
 	my @col_sums = ( 0,0,0,0,0 );
@@ -39,7 +39,6 @@ sub check_win {
 	foreach my $i (0 .. 4) {
 		if (sum($bingo_card[$i]) == 5) {
 			$win = 1;
-			print("Winner!\n");
 			last;
 		}
 		foreach my $j (0 .. 4) {
@@ -49,7 +48,6 @@ sub check_win {
 
 	if ( 5 ~~ @col_sums ) {
 		$win = 1;
-		print("Winner!\n");
 	}
 
 	return $win;

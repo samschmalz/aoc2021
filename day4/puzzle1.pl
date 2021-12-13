@@ -42,13 +42,29 @@ foreach (@boards) {
 
 foreach (@rolls) {
 	my $roll = $_;
+	my $winner = -1;
 	foreach my $i (0 .. $#boards) {
 		$board_scores[$i] = Bingo::check_number($roll, $boards[$i], $board_scores[$i]);
-		print Dumper $board_scores[$i];
-=begin
 		if (Bingo::check_win($board_scores[$i])) {
+			$winner = $i;
 			print("Winner!\n");
+			last;
 		}
-=cut
+	}
+	if ($winner > -1) {
+		my @victor = @{$boards[$winner]};
+		my @victor_score = @{$board_scores[$winner]};
+		my $victor_sum = 0;
+		foreach my $i ( 0 .. $#victor ) {
+			my @row = @{ $victor[$i] };
+			foreach my $j ( 0 .. $#row ) {
+				if ( $victor_score[$i][$j] == 0 ) {
+					$victor_sum += $victor[$i][$j];
+				}
+			}
+		}
+		$victor_sum *= $roll;
+		print("Final Score: $victor_sum\n");
+		last;
 	}
 }
