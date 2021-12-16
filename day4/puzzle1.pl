@@ -47,7 +47,7 @@ foreach (@rolls) {
 		$board_scores[$i] = Bingo::check_number($roll, $boards[$i], $board_scores[$i]);
 		if (Bingo::check_win($board_scores[$i])) {
 			$winner = $i;
-			print("Winner!\n");
+			print("Winner: board $i!\n");
 			last;
 		}
 	}

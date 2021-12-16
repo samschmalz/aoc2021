@@ -37,9 +37,10 @@ sub check_win {
 	my @col_sums = ( 0,0,0,0,0 );
 
 	foreach my $i (0 .. 4) {
-		if (sum($bingo_card[$i]) == 5) {
+		my @row = @{ $bingo_card[$i] };
+		if (sum(@row) == 5) {
 			$win = 1;
-			last;
+			return $win;
 		}
 		foreach my $j (0 .. 4) {
 			$col_sums[$j] += $bingo_card[$i][$j];
